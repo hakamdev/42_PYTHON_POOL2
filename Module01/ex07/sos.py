@@ -1,10 +1,12 @@
 import sys
 
+
 def check_message(message):
     for c in message:
         if not c.isalnum() and c != ' ':
             return False
     return True
+
 
 def encode_morse(message):
     MORSE_CODE_DICT = {
@@ -20,6 +22,7 @@ def encode_morse(message):
     upper_message = message.upper()
     return ' '.join([MORSE_CODE_DICT[c] for c in upper_message])
 
+
 def main():
     if len(sys.argv) != 2:
         print("AssertionError: the arguments are bad")
@@ -28,6 +31,7 @@ def main():
         print("AssertionError: the arguments are bad")
         return
     print(encode_morse(sys.argv[1]))
+
 
 if __name__ == "__main__":
     main()

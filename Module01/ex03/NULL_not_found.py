@@ -8,7 +8,8 @@ def NULL_not_found(object: any) -> int:
 
     if is_nan or is_falsy:
         print(
-            f'{labels[object.__class__.__name__]}: {object} {object.__class__}')
+            f'{labels[object.__class__.__name__]}: {object} {object.__class__}'
+            )
         return 0
     else:
         print('Type not Found')
