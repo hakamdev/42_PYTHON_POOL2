@@ -1,5 +1,10 @@
 def slice_me(family: list, start: int, end: int) -> list:
     """
+    Slice a 2D list based on the start and end indexes.
+    Args:
+        family (list): 2D list.
+        start (int): Start index.
+        end (int): End index.
     """
     # Error handling
     if type(family) is not list:

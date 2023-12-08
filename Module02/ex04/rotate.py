@@ -1,4 +1,5 @@
 from load_image import ft_load
+from numpy import zeros
 import matplotlib.pyplot as plt
 
 
@@ -21,10 +22,16 @@ def main():
         for j in range(sliced_image.shape[1]):
             grayscale_image[i][j] = sum(sliced_image[i][j]) / 3
 
+    # rotate image
+    rotated_image = zeros(grayscale_image.shape, dtype=int)
+    for i in range(grayscale_image.shape[0]):
+        for j in range(grayscale_image.shape[1]):
+            rotated_image[i][j] = grayscale_image[j][i]
+
     # display the image
-    print(f"New shape after slicing: {grayscale_image.shape}")
-    print(grayscale_image)
-    plt.imshow(grayscale_image)
+    print(f"New shape after Transpose: {rotated_image.shape}")
+    print(rotated_image)
+    plt.imshow(rotated_image)
     plt.show()
 
 
