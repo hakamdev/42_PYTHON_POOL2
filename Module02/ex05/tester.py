@@ -13,10 +13,14 @@ print(ft_invert.__doc__)
 
 # displaying all images
 images = [array, inverted_img, red_img, green_img, blue_img, gray_img]
-fig = plt.figure(figsize=(8, 8))
+titles = ["Original Image", "Inverted Image", "Red Image", "Green Image",
+          "Blue Image", "Gray Image"]
+fig = plt.figure(figsize=(10, 10))
 columns = 2
 rows = 3
 for i in range(columns * rows):
-    fig.add_subplot(rows, columns, i + 1)
+    ax = fig.add_subplot(rows, columns, i + 1)
+    plt.title(titles[i])
     plt.imshow(images[i])
+fig.tight_layout(pad=5.0)
 plt.show()
