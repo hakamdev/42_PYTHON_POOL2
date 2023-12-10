@@ -9,22 +9,28 @@ def give_bmi(height: list[int | float],
     Returns:
         list[int | float]: List of BMIs.
     """
-    if type(height) is not list or type(weight) is not list:
-        print("Error: invalid args")
-        return []
-    if not (len(height) == len(weight)):
-        print("Error: height and weight lists must have the same length")
-        return []
-    length = len(height)
-    bmi = []
-    for i in range(length):
-        try:
+    try:
+        if type(height) is not list or type(weight) is not list:
+            print("AssertionError: invalid args")
+            return []
+        if not (len(height) == len(weight)):
+            print(
+                "AssertionError: height and weight must have the same length")
+            return []
+        if len(height) == 0:
+            return []
+        length = len(height)
+        bmi = []
+        for i in range(length):
             bmi.append(weight[i] / (height[i] ** 2))
-        except ZeroDivisionError:
-            pass
-        except TypeError:
-            pass
-    return bmi
+        return bmi
+    except ZeroDivisionError:
+        print("AssertionError: division by zero")
+    except TypeError:
+        print("AssertionError: invalid types in height or weight lists")
+    except Exception:
+        print("AssertionError: unknown error")
+    return []
 
 
 def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
@@ -38,12 +44,12 @@ def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
     """
     bmi_limit = []
     if type(limit) is not int or type(bmi) is not list:
-        print("Error: invalid args")
+        print("AssertionError: invalid args")
         return bmi_limit
 
     for i in range(len(bmi)):
         if not (type(bmi[i]) is int or type(bmi[i]) is float):
-            print("Error: bmi arg contains values with invalid types")
+            print("AssertionError: bmi arg contains values with invalid types")
             return []
         bmi_limit.append(bmi[i] > limit)
     return bmi_limit

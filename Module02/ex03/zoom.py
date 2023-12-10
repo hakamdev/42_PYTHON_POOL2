@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 
 def main():
     image = ft_load("animal.jpeg")
+    if (image is None):
+        return
     print(image)
 
     # slice the image

@@ -1,72 +1,65 @@
-from numpy import zeros, ndarray
+# from numpy import zeros, ndarray, sum
+import numpy as np
 # import matplotlib.pyplot as plt
 
 
-def ft_invert(array) -> ndarray:
+def ft_invert(array) -> np.ndarray:
     """This function inverts an image.
-    Args:
-        array (ndarray): The image to invert.
+Args:
+    array (ndarray): The image to invert.
     """
-    inverted_image = zeros(array.shape, dtype=int)
-    for i in range(array.shape[0]):
-        for j in range(array.shape[1]):
-            inverted_image[i][j] = 255 - array[i][j]
+    inverted_image = 255 - array
     # plt.imshow(inverted_image)
     # plt.show()
     return inverted_image
 
 
-def ft_red(array) -> ndarray:
+def ft_red(array) -> np.ndarray:
     """This function applies a red filter to an image.
-    Args:
-        array (ndarray): The image to apply the red filter.
+Args:
+    array (ndarray): The image to apply the red filter.
     """
-    red_image = zeros(array.shape, dtype=int)
-    for i in range(array.shape[0]):
-        for j in range(array.shape[1]):
-            red_image[i][j] = [array[i][j][0], 0, 0]
+    red_image = array * [1, 0, 0]
     # plt.imshow(red_image)
     # plt.show()
     return red_image
 
 
-def ft_green(array) -> ndarray:
+def ft_green(array) -> np.ndarray:
     """This function applies a green filter to an image.
-    Args:
-        array (ndarray): The image to apply the green filter.
+Args:
+    array (ndarray): The image to apply the green filter.
     """
-    green_image = zeros(array.shape, dtype=int)
-    for i in range(array.shape[0]):
-        for j in range(array.shape[1]):
-            green_image[i][j] = [0, array[i][j][1], 0]
-    # plt.imshow(green_image)
-    # plt.show()
+    green_image = np.zeros(array.shape, dtype=int)
+    green_image[:, :, 0] = array[:, :, 0] - array[:, :, 0]
+    green_image[:, :, 1] = array[:, :, 1]
+    green_image[:, :, 2] = array[:, :, 2] - array[:, :, 2]
     return green_image
 
 
-def ft_blue(array) -> ndarray:
+def ft_blue(array) -> np.ndarray:
     """This function applies a blue filter to an image.
-    Args:
-        array (ndarray): The image to apply the blue filter.
+Args:
+    array (ndarray): The image to apply the blue filter.
     """
-    red_image = zeros(array.shape, dtype=int)
-    for i in range(array.shape[0]):
-        for j in range(array.shape[1]):
-            red_image[i][j] = [0, 0, array[i][j][2]]
+    blue_image = np.zeros(array.shape, dtype=int)
+    blue_image[:, :, 0] = 0
+    blue_image[:, :, 1] = 0
+    blue_image[:, :, 2] = array[:, :, 2]
     # plt.imshow(red_image)
     # plt.show()
-    return red_image
+    return blue_image
 
 
-def ft_grey(array) -> ndarray:
+def ft_grey(array) -> np.ndarray:
     """This function applies a greyscale filter to an image.
-    Args:
-        array (ndarray): The image to apply the greyscale filter.
+Args:
+    array (ndarray): The image to apply the greyscale filter.
     """
-    gray_image = zeros(array.shape, dtype=int)
+    gray_image = np.zeros(array.shape, dtype=int)
     for i in range(array.shape[0]):
         for j in range(array.shape[1]):
-            gray_image[i][j] = sum(array[i][j]) / 3
+            gray_image[i][j] = np.sum(array[i][j]) / 3
     # plt.imshow(gray_image)
     # plt.show()
     return gray_image
