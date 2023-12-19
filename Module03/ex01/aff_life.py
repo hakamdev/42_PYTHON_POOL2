@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def aff_life(path: str) -> None:
-    """Show a graph of life expectancy in Morocco from 1950 to 2100
+    """Show a graph of life expectancy in Morocco from 1800 to 2100
     Args:
         path: path to the csv file
     """
