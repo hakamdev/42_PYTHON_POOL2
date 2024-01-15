@@ -9,6 +9,9 @@ class Baratheon(Character):
         self.eyes = "brown"
         self.hairs = "dark"
 
+    def __str__(self):
+        return "Vector: ('Baratheon', 'brown', 'dark')"
+
     def die(self):
         """kill a Baratheon"""
         self.is_alive = False
@@ -26,6 +29,9 @@ class Lannister(Character):
         self.family_name = "Lannister"
         self.eyes = "blue"
         self.hairs = "light"
+
+    def __str__(self):
+        return "Vector: ('Lannister', 'blue', 'light')"
 
     def die(self):
         """kill a Lannister"""
