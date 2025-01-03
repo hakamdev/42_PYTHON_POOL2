@@ -7,19 +7,24 @@ def aff_life(path: str) -> None:
     Args:
         path: path to the csv file
     """
-    # Load the csv file
+    # load the csv file
     df = load(path)
     if (df is None):
         return None
-    # Set the country column as index
+    # set the country column as index
     df.set_index("country", inplace=True)
-    # Get the Morocco data and transpose it
-    morocco_data = df.loc['Morocco'].T
-    # Plot the graph
-    morocco_data.plot(
-        title='Morocco life expectancy projections',
-        xlabel="Year",
-        ylabel='Life Expectancy')
+    # get the Morocco data
+    morocco_data = df.loc['Morocco']
+    # extract year value & life expenctancy values
+    years = morocco_data.keys()
+    life_expectancy_values = morocco_data.values
+    # plot values
+    plt.plot(years, life_expectancy_values)
+    plt.title("Morocco life expectancy projections")
+    plt.xlabel("Year")
+
+    plt.ylabel("Life Expectancy")
+    plt.xticks(years[::40])
     plt.show()
 
 

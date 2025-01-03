@@ -2,7 +2,7 @@ from load_csv import load
 
 
 def main():
-    print(load("tester.py"))
+    print(load("life_expectancy_years.csv"))
 
 
 if __name__ == "__main__":

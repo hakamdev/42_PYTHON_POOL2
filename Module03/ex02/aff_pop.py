@@ -3,13 +3,15 @@ import matplotlib.pyplot as plt
 
 
 def convert(val):
-    multiplier = val[-1].lower()
-    if multiplier == 'm':
-        return float(val[:-1]) * 1000000
-    elif multiplier == 'k':
-        return float(val[:-1]) * 1000
+    suffix = val[-1].lower()
+    if suffix == 'b':
+        return int(float(val[:-1]) * 1000000000)
+    if suffix == 'm':
+        return int(float(val[:-1]) * 1000000)
+    elif suffix == 'k':
+        return int(float(val[:-1]) * 1000)
     else:
-        return float(val)
+        return int(val)
 
 
 def aff_pop(path: str) -> None:
@@ -17,28 +19,30 @@ def aff_pop(path: str) -> None:
     Args:
         path: path to the csv file
     """
-    # Load the csv file
+    # load the csv file
     df = load(path)
     if (df is None):
         return None
-    # Set the country column as index
+    # set the country column as index
     df.set_index("country", inplace=True)
-    # Get the Morocco and France data and transpose it
-    morocco_vs_france = df.loc[['Morocco', 'France'], '1800': '2050']
+    # get the Morocco and France data
+    morocco_data = df.loc["Morocco", '1800': '2050'].map(convert)
+    france_data = df.loc["France", '1800': '2050'].map(convert)
+    # extract years and life expectancy
+    years = morocco_data.keys()
+    morocco_life_expectancy = morocco_data.values
+    france_life_expectancy = france_data.values
+    # plot data
+    plt.plot(years, morocco_life_expectancy, label="Morocco")
+    plt.plot(years, france_life_expectancy, label="France")
+    # customize graph
+    plt.title("Population Projections")
+    plt.xlabel("Year")
+    plt.ylabel("Population")
+    plt.legend(loc="lower right")
+    plt.xticks(years[::40])
+    plt.yticks([20000000, 40000000, 60000000], labels=['20M', '40M', '60M'])
 
-    # Convert the string values (20M, 20k...) to float
-    m_vs_f_converted = morocco_vs_france.map(convert)
-
-    # Transpose the data and plot the graph,
-    ax = m_vs_f_converted.T.plot(
-        title='Population Projections',
-        xlabel="Year",
-        ylabel='Population')
-
-    # Change the y axis labels back to M and K
-    ax.set_yticks([20000000, 40000000, 60000000], labels=['20M', '40M', '60M'])
-
-    # Show the graph
     plt.show()
 
 

@@ -2,6 +2,10 @@ import pandas as pd
 
 
 def load(path: str) -> pd.DataFrame:
+    """Loads a CSV file and returns its data as a DataFrame object
+    Args:
+        path: path to the csv file
+    """
     if (type(path) is not str):
         print("AssertionError: Invalid path")
         return None
