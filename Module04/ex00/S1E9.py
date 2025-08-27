@@ -3,10 +3,11 @@ from abc import ABC, abstractmethod
 
 class Character(ABC):
     """Character abstract class"""
-    def __init__(self, first_name, is_alive=True):
+
+    def __init__(this, first_name, is_alive=True):
         """init a character"""
-        self.first_name = first_name
-        self.is_alive = is_alive
+        this.first_name = first_name
+        this.is_alive = is_alive
 
     @abstractmethod
     def die(self):

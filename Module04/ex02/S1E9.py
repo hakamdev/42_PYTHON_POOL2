@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 
 class Character(ABC):
     """Character abstract class"""
+
     def __init__(self, first_name, is_alive=True):
         """init a character"""
         self.first_name = first_name
@@ -16,6 +17,7 @@ class Character(ABC):
 
 class Stark(Character):
     """Stark class is a Character class representing the Stark family"""
+
     def __init__(self, first_name, is_alive=True):
         """init a Stark"""
         super().__init__(first_name, is_alive)
