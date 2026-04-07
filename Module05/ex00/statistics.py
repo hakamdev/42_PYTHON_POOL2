@@ -2,7 +2,7 @@ def validate_args(*args: any) -> bool:
     """Validate if all args are numbers.
 """
     for num in args:
-        if not num.__class__ in [int, float]:
+        if num.__class__ not in [int, float]:
             return False
     return True
 
@@ -70,10 +70,9 @@ def calculate_upper_quartile(args: list) -> float:
 """
     length = args_length(args)
     index = length * (3 / 4)
-    print(index)
     if index % 1 != 0:
-        return args[int(index)]
-    return (args[int(index)] + args[int(index) - 1]) / 2
+        return float(args[int(index)])
+    return float(args[int(index)] + args[int(index) - 1] / 2)
 
 
 def calculate_lower_quartile(args: list) -> float:
@@ -81,43 +80,53 @@ def calculate_lower_quartile(args: list) -> float:
 """
     length = args_length(args)
     index = length / 4
-    print(index)
     if index % 1 != 0:
-        return args[int(index)]
-    return (args[int(index)] + args[int(index) - 1]) / 2
+        return float(args[int(index)])
+    return float(args[int(index)] + args[int(index) - 1] / 2)
+
+
+def calculate_quartiles(args: list) -> list:
+    """Calculate the upper and lower quartiles of a list of numbers.
+"""
+    return [calculate_lower_quartile(args), calculate_upper_quartile(args)]
 
 
 def calculate_variance(args: list) -> float:
     """Calculate the variance of a list of numbers.
 """
-    pass
+    mean = caluclate_mean(args)
+    variance = 0
+    for num in args:
+        variance += (num - mean) ** 2
+    return variance / args_length(args)
 
 
 def calculate_standard_deviation(args: list) -> float:
     """Calculate the standard deviation of a list of numbers.
 """
-    pass
+    return calculate_variance(args) ** 0.5
 
 
-# mean : 95.6
-# median : 42
-# quartile : [11.0, 64.0]
-# -----
-# std : 17982.70124086944
-# var : 323377543.9183673
 def ft_statistics(*args: any, **kwargs: any) -> None:
-    """Calculate the mean, median, quartile, variance, 
+    """Calculate the mean, median, quartile, variance,
 and standard deviation of a list of numbers
 """
-    if not validate_args(*args):
-        print("AssertionError: args must be numbers.")
-        return
-    args_list = sort_args(*args)
-    print(args_list)
-
-    print("Mean:", caluclate_mean(args_list))
-    print("Median:", calculate_median(args_list))
-    print("Upper Quartile:", calculate_upper_quartile(args_list))
-    print("Lower Quartile:", calculate_lower_quartile(args_list))
-    print("Variance:", calculate_variance(args_list))
-    print("Standard Deviation:", calculate_standard_deviation(args_list))
+    args_len = args_length(args)
+    args_valid = True
+    if not (validate_args(*args) and args_len > 0):
+        args_valid = False
+    for key, value in kwargs.items():
+        if (not args_valid):
+            print("ERROR")
+            continue
+        args_list = sort_args(*args)
+        if value == "mean":
+            print("mean :", caluclate_mean(args_list))
+        elif value == "median":
+            print("median :", calculate_median(args_list))
+        elif value == "quartile":
+            print("quartile :", calculate_quartiles(args_list))
+        elif value == "std":
+            print("std :", calculate_standard_deviation(args_list))
+        elif value == "var":
+            print("var :", calculate_variance(args_list))
